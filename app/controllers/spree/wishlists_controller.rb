@@ -18,7 +18,7 @@ class Spree::WishlistsController < Spree::StoreController
   
   def destroy
     
-     @wishlist = Spree::Wishlist.where("product_id = ? AND user_id = ?", params[:product_id], spree_current_user.id).first
+     @wishlist = Spree::Wishlist.where("product_id = ? AND user_id = ?", params[:id], spree_current_user.id).first
      @product = @wishlist.product
      @wishlist.destroy
      redirect_to :back
