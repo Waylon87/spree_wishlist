@@ -10,7 +10,7 @@ class Spree::WishlistsController < Spree::StoreController
     
     @wishlist = Spree::Wishlist.new wishlist_attributes
     @wishlist.user_id = spree_current_user.id
-    
+    @product = @wishlist.product
     @wishlist.save
     redirect_to :back
     
@@ -18,7 +18,8 @@ class Spree::WishlistsController < Spree::StoreController
   
   def destroy
     
-     @wishlist = Spree::Wishlist.where("product_id=? AND user_id=?",params[:id],spree_current_user.id).first
+     @wishlist = Spree::Wishlist.where("product_id = ? AND user_id = ?", params[:product_id], spree_current_user.id).first
+     @product = @wishlist.product
      @wishlist.destroy
      redirect_to :back
   end
